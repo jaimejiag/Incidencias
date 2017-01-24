@@ -79,7 +79,7 @@ background-image: linear-gradient(top, #ffffff, #e6e6e6);
 
 .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
 
-.btn-block { width: 100%; display:block; }
+.btn-block { width: 90%; display:block; }
 
 * { 
 	-webkit-box-sizing:border-box; 
@@ -200,4 +200,33 @@ nav ul li a:hover {
 }
 .bs-callout-primary h4 {
     color: #428bca;
+}
+
+
+.add form, .poster {
+    float: left;
+    width: 46%;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 2%;
+    margin-top: 0px;
+    border-radius: 10px;
+}
+form > * {
+    display: block;
+    padding: 10px;
+    border: 1px solid #AAA;
+    width: 90%;
+    margin: 10px 5%;
+    font-size: 18px;
+    border-radius: 6px;
+}
+form textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+
+.add form {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid #DDD;
 }

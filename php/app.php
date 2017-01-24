@@ -17,6 +17,7 @@
 		            <title>$titulo</title>
     		        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     		        <link rel='stylesheet' type='text/css' href='../css/style.css' />
+					<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
   	    	    </head>
 
   		        <body>
@@ -30,8 +31,8 @@
     			    <nav>
     			        <ul>
     				        <li><a href='#'>Buscar incidencia</a></li>
-							<li><a href='#'>Dar de alta una incidencia</a></li>
-                            <li><a href='#'>Desconectar</a></li>
+							<li><a href='addIncidencia'>Dar de alta una incidencia</a></li>
+                            <li><a href='logout.php'>Desconectar</a></li>
     			        </ul>
     			    </nav>";
     			    //<div id='content'>";
@@ -47,18 +48,22 @@
 		    </html>";
         }
 
+
         function showErrorConnection() {
 		    echo "<p>".$this->$dao->error."</p>";
 	    }
+
 
 		function init_session($user) {
 			if (!isset($_SESSION['user']))
 				$_SESSION['user'] = $user;
 		}
 
+
 		function getDao() {
 			return $this->dao;
 		}
+
 
 		function start_session() {
 			session_start();
@@ -67,11 +72,21 @@
 				header("Location:login.php");
 		}
 
-		function isLogged(){
-		if (!isset($_SESSION['user']) && !isset($_SESSION['password']))
-			return false;
 
-		return true;
-	}
+		function isLogged(){
+			if (!isset($_SESSION['user']) && !isset($_SESSION['password']))
+				return false;
+
+			return true;
+		}
+
+
+		function destroy_session() {
+			if (!isset($_SESSION['user']))
+				unset($_SESSION['user']);
+		
+			session_destroy();
+			header("Location:../index.php");
+		}
     }
 ?>

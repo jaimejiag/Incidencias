@@ -9,9 +9,9 @@
     echo "
     <div class='login'>
 	    <h1>Login</h1>
-        <form method='POST' action=".$_SERVER['PHP_SELF'].">
-    	    <input type='text' name='user' placeholder='Nombre usuario' required='required' />
-            <input type='password' name='password' placeholder='Contraseña' required='required' />
+        <form class='main' method='POST' action=".$_SERVER['PHP_SELF'].">
+    	    <input class='main' type='text' name='user' placeholder='Nombre usuario' required='required' />
+            <input class='main' type='password' name='password' placeholder='Contraseña' required='required' />
             <button type='submit' class='btn btn-primary btn-block btn-larg'>Entrar</button>
         </form>
     </div>";
