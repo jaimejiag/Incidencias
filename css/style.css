@@ -224,6 +224,7 @@ form > * {
 form textarea {
     min-height: 200px;
     resize: vertical;
+	font-family: 'Open Sans'
 }
 
 .add form {

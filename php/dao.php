@@ -2,13 +2,16 @@
     define('DATABASE', "incidenciasDB");
 
     define('MYSQL_HOST', "mysql:dbname=".DATABASE.";host=localhost");
-    define('MYSQL_USER', "jaime");
-    define('MYSQL_PASSWORD', "usuario");
+    //define('MYSQL_USER', "jaime");
+    //define('MYSQL_PASSWORD', "usuario");
+    define('MYSQL_USER', "root");
+    define('MYSQL_PASSWORD', "123");
 
     define('TABLE_USER', "user");
     define('TABLE_TIPO', "tipoIncidencia");
     define('TABLE_INCIDENCIA', "incidencia");
 
+    define('USER_ID', "id");
     define('USER_NAME', "username");
     define('USER_PASSWORD', "password");
     define('USER_SUPER', "super");
@@ -94,12 +97,45 @@
         }
 
 
+        function getUserId($name) {
+            $sql = "SELECT ".USER_ID." FROM ".TABLE_USER." WHERE username='$name'";
+            echo $sql;
+            $statement = $this->conn->query($sql);
+            $result =$statement->fetch();
+
+            return $result;
+        }
+
+
         function getTipoIncidencia($id) {
             $sql = "SELECT ".TIPO_TIPO." FROM ".TABLE_TIPO." WHERE id=$id";
             $statement = $this->conn->query($sql);
             $result = $statement->fetch();
 
             return $result;
+        }
+
+
+        function getAllTipoIncidencia() {
+            $sql = "SELECT * FROM ".TABLE_TIPO;
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetchAll();
+
+            return $result;
+        }
+
+
+        function insertIncidencia($usuario, $tipo, $comentario, $fecha) {
+            $sql = "INSERT INTO ".TABLE_INCIDENCIA." (".INCIDENCIA_IDUSUARIO.",".INCIDENCIA_IDTIPO.",".INCIDENCIA_COMENTARIO.
+            ",".INCIDENCIA_FECHA.") VALUES (:idUsuario, :idTipo, :comentario, :fecha)";
+
+            $statement = $this->conn->prepare($sql);
+            $statement->bindParam(":idUsuario", $usuario);
+            $statement->bindParam(":idTipo", $tipo);
+            $statement->bindParam(":comentario", $comentario);
+            $statement->bindParam(":fecha", $fecha);
+
+            return $statement->execute();
         }
     }
 ?>

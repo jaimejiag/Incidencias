@@ -31,7 +31,7 @@
     			    <nav>
     			        <ul>
     				        <li><a href='#'>Buscar incidencia</a></li>
-							<li><a href='addIncidencia'>Dar de alta una incidencia</a></li>
+							<li><a href='addIncidencia.php'>Dar de alta una incidencia</a></li>
                             <li><a href='logout.php'>Desconectar</a></li>
     			        </ul>
     			    </nav>";
