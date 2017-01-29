@@ -5,7 +5,7 @@
     $app = new App();
     $app->start_session();
     $app->head("Añadir", "Añadir");
-    $app->nav();
+    $app->navAdd();
 
     echo "
     <form method='POST' action=".$_SERVER['PHP_SELF'].">
@@ -22,6 +22,7 @@
     </form>";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        date_default_timezone_set("UTC");
         $tipo = $_POST['tipoIncidencia'];
         $comentario = $_POST['comentario'];
         $idUser = $_SESSION["userId"];

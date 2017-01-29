@@ -1,0 +1,13 @@
+El nombre de usuario y contraseña para entrar a la base de datos es:
+Nombre: www-data    Contraseña: www-data
+
+El nombre de la base de datos se tiene que llamar 'incidenciasDB'
+
+Si se quiere cambiar algo de lo anterior tendrás que cambiar el valor de estas variables el el archivo 'dao.php'
+
+Los usuarios creados para el ejemplo son: 'lourdes', 'eliseo', 'sebastian'. Sus contraseñas son sus propios nombres, ej:
+Nombre: lourdes     Contraseña: lourdes
+
+El usuario root es 'sebastian'.
+
+El archivo para importar las tablas y los datos de la base de datos está en la raíz de la carpeta con el nombre de 'incidencias.sql'.

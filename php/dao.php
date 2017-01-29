@@ -2,10 +2,8 @@
     define('DATABASE', "incidenciasDB");
 
     define('MYSQL_HOST', "mysql:dbname=".DATABASE.";host=localhost");
-    //define('MYSQL_USER', "jaime");
-    //define('MYSQL_PASSWORD', "usuario");
-    define('MYSQL_USER', "root");
-    define('MYSQL_PASSWORD', "123");
+    define('MYSQL_USER', "user");
+    define('MYSQL_PASSWORD', "password");
 
     define('TABLE_USER', "user");
     define('TABLE_TIPO', "tipoIncidencia");
@@ -32,7 +30,7 @@
         function __construct() {
             try {
                 $this->conn = new PDO(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
-            } catch (PDPException $e) {
+            } catch (PDOException $e) {
                 $this->error = "Error en la conexión: ".$e->getMessage();
                 $this->conn = null;
             }
@@ -88,8 +86,17 @@
         }
 
 
-        function getUsername($id) {
-            $sql = "SELECT ".USER_NAME." FROM ".TABLE_USER." WHERE id=$id";
+        function getIncidenciasFecha($fecha) {
+            $sql = "SELECT * FROM ".TABLE_INCIDENCIA." WHERE fecha='$fecha'";
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetchAll();
+
+            return $result;
+        }
+
+
+        function getIncidencia($id) {
+            $sql = "SELECT * FROM ".TABLE_INCIDENCIA." WHERE id='$id'";
             $statement = $this->conn->query($sql);
             $result = $statement->fetch();
 
@@ -97,13 +104,34 @@
         }
 
 
-        function getUserId($name) {
-            $sql = "SELECT ".USER_ID." FROM ".TABLE_USER." WHERE username='$name'";
-            echo $sql;
-            $statement = $this->conn->query($sql);
-            $result =$statement->fetch();
+        function insertIncidencia($usuario, $tipo, $comentario, $fecha) {
+            $sql = "INSERT INTO ".TABLE_INCIDENCIA." (".INCIDENCIA_IDUSUARIO.",".INCIDENCIA_IDTIPO.",".INCIDENCIA_COMENTARIO.
+            ",".INCIDENCIA_FECHA.") VALUES (:idUsuario, :idTipo, :comentario, :fecha)";
 
-            return $result;
+            $statement = $this->conn->prepare($sql);
+            $statement->bindParam(":idUsuario", $usuario);
+            $statement->bindParam(":idTipo", $tipo);
+            $statement->bindParam(":comentario", $comentario);
+            $statement->bindParam(":fecha", $fecha);
+
+            return $statement->execute();
+        }
+
+
+        function updateIncidencia($id, $tipo, $comentario) {
+            $sql = "UPDATE ".TABLE_INCIDENCIA." SET ".INCIDENCIA_IDTIPO." = '$tipo', ".INCIDENCIA_COMENTARIO." = '$comentario' 
+            WHERE id=$id";
+            $statement = $this->conn->query($sql);
+            
+            return $statement;
+        }
+
+
+        function deleteIncidencia($id) {
+            $sql = "DELETE FROM ".TABLE_INCIDENCIA." WHERE id=$id";
+            $statement = $this->conn->query($sql);
+
+            return $statement;
         }
 
 
@@ -125,17 +153,79 @@
         }
 
 
-        function insertIncidencia($usuario, $tipo, $comentario, $fecha) {
-            $sql = "INSERT INTO ".TABLE_INCIDENCIA." (".INCIDENCIA_IDUSUARIO.",".INCIDENCIA_IDTIPO.",".INCIDENCIA_COMENTARIO.
-            ",".INCIDENCIA_FECHA.") VALUES (:idUsuario, :idTipo, :comentario, :fecha)";
+        function getUsername($id) {
+            $sql = "SELECT ".USER_NAME." FROM ".TABLE_USER." WHERE id=$id";
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetch();
 
-            $statement = $this->conn->prepare($sql);
-            $statement->bindParam(":idUsuario", $usuario);
-            $statement->bindParam(":idTipo", $tipo);
-            $statement->bindParam(":comentario", $comentario);
-            $statement->bindParam(":fecha", $fecha);
+            return $result;
+        }
 
-            return $statement->execute();
+
+        function getUserId($name) {
+            $sql = "SELECT ".USER_ID." FROM ".TABLE_USER." WHERE username='$name'";
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetch();
+
+            return $result;
+        }
+
+
+        function getUserSuper($name) {
+            $sql = "SELECT ".USER_SUPER." FROM ".TABLE_USER." WHERE username='$name'";
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetch();
+
+            return $result;
+        }
+
+
+        function getAllUsers() {
+            $sql = "SELECT * FROM ".TABLE_USER;
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetchAll();
+
+            return $result;
+        }
+
+
+        function getUser($id) {
+            $sql = "SELECT * FROM ".TABLE_USER." WHERE id=$id";
+            $statement = $this->conn->query($sql);
+            $result = $statement->fetch();
+
+            return $result;
+        }
+
+
+        function insertUser($name, $password) {
+            if ($name != "sebastian"){
+                $sql = "INSERT INTO ".TABLE_USER." (".USER_NAME.", ".USER_PASSWORD.") 
+                VALUES (:username, :password)";
+                $statement = $this->conn->prepare($sql);
+                $statement->bindParam(":username", $name);
+                $statement->bindParam(":password", sha1($password));
+
+                return $statement->execute();
+            } else
+                return false;
+        }
+
+
+        function updateUser($id, $name, $password) {
+            $sql = "UPDATE ".TABLE_USER." SET ".USER_NAME." = '$name', ".USER_PASSWORD." = '".sha1($password)."' 
+            WHERE id=$id";
+            $statement = $this->conn->query($sql);
+            
+            return $statement;
+        }
+
+
+        function deleteUser($id) {
+            $sql = "DELETE FROM ".TABLE_USER." WHERE id=$id";
+            $statement = $this->conn->query($sql);
+
+            return $statement;
         }
     }
 ?>

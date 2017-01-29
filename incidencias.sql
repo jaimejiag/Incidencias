@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 24, 2017 at 09:33 PM
+-- Generation Time: Jan 25, 2017 at 10:43 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.27
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `incidencia` (
   `id` int(11) NOT NULL,
-  `idUsusario` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
   `idTipo` int(11) NOT NULL,
   `comentario` varchar(255) COLLATE utf8_bin NOT NULL,
   `fecha` date NOT NULL
@@ -38,9 +38,19 @@ CREATE TABLE `incidencia` (
 -- Dumping data for table `incidencia`
 --
 
-INSERT INTO `incidencia` (`id`, `idUsusario`, `idTipo`, `comentario`, `fecha`) VALUES
+INSERT INTO `incidencia` (`id`, `idUsuario`, `idTipo`, `comentario`, `fecha`) VALUES
 (1, 1, 1, 'Juan llego tarde debido al autobús', '2017-01-24'),
-(2, 1, 2, 'Pablo salió al servicio', '2017-01-24');
+(2, 1, 2, 'Pablo salió al servicio', '2017-01-24'),
+(3, 1, 3, 'MarÃ­a no hace las tareas que se les pide', '2017-01-25'),
+(4, 2, 4, 'Francisco le ha pegado una colleja correctora a un compaÃ±ero sin antes parlamentar', '2017-01-25'),
+(7, 3, 2, 'Marta saliÃ³ al servicio', '2017-01-25'),
+(8, 3, 5, 'Pedro tuvo que salir por enfermedad', '2017-01-25'),
+(9, 3, 1, 'LucÃ­a llegÃ³ tarde a clase de matemÃ¡ticas', '2017-01-25'),
+(10, 2, 3, 'AgustÃ­n no trabaja lo suficiente en clase', '2017-01-25'),
+(11, 2, 2, 'JosÃ© fue al servicio en fÃ­sica', '2017-01-25'),
+(12, 2, 1, 'Aldara llegÃ³ tarde a clase, se retrasÃ³ hasta tercera hora', '2017-01-25'),
+(13, 1, 4, 'Javier ha estado insultado a un compaÃ±ero durante la hora del recreo', '2017-01-25'),
+(14, 1, 2, 'Elisa tuvo que salir al servicio a cuarta hora', '2017-01-25');
 
 -- --------------------------------------------------------
 
@@ -95,7 +105,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `super`) VALUES
 --
 ALTER TABLE `incidencia`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idUsusario` (`idUsusario`),
+  ADD KEY `idUsusario` (`idUsuario`),
   ADD KEY `idTipo` (`idTipo`);
 
 --
@@ -118,7 +128,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `incidencia`
 --
 ALTER TABLE `incidencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tipoIncidencia`
 --
@@ -128,7 +138,7 @@ ALTER TABLE `tipoIncidencia`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -137,7 +147,7 @@ ALTER TABLE `user`
 -- Constraints for table `incidencia`
 --
 ALTER TABLE `incidencia`
-  ADD CONSTRAINT `incidencia_ibfk_1` FOREIGN KEY (`idUsusario`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `incidencia_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `incidencia_ibfk_2` FOREIGN KEY (`idTipo`) REFERENCES `tipoIncidencia` (`id`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

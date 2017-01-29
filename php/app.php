@@ -20,28 +20,56 @@
 					<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
   	    	    </head>
 
-  		        <body>
+  		        <body style='overflow: auto;'>
     		        <header>
 				        <h1>$h1</h1>
                     </header>";
         }
 
-        function nav() {
+        function navIncidencias() {
             echo "
     			    <nav>
     			        <ul>
-    				        <li><a href='#'>Buscar incidencia</a></li>
+    				        <li><a href='searchIncidencias.php'>Buscar incidencia</a></li>
 							<li><a href='addIncidencia.php'>Dar de alta una incidencia</a></li>
                             <li><a href='logout.php'>Desconectar</a></li>
     			        </ul>
-    			    </nav>";
-    			    //<div id='content'>";
+    			    </nav>
+    			    <div id='content'>";
         }
+
+
+		function navAdd() {
+            echo "
+    			    <nav>
+    			        <ul>
+							<li><a href='incidencias.php'>Volver</a></li>
+                            <li><a href='logout.php'>Desconectar</a></li>
+    			        </ul>
+    			    </nav>
+    			<div id='content'>";
+        }
+
+
+		function navSuper() {
+            echo "
+    			    <nav>
+    			        <ul>
+							<li><a href='searchIncidencias.php'>Buscar incidencia</a></li>
+							<li><a href='addIncidencia.php'>Dar de alta una incidencia</a></li>
+							<li><a href='users.php'>Ver usuarios</a></li>
+							<li><a href='addUser.php'>Dar de alta un usuario</a></li>
+                            <li><a href='logout.php'>Desconectar</a></li>
+    			        </ul>
+    			    </nav>
+    			<div id='content'>";
+        }
+
 
         function footer() {
             echo 
-				    //</div>
-				    "<footer>
+				    "</div>
+				    <footer>
     				    <p>Página realizada por: Jaime Jiménez Agudo</p>
    				    </footer>
   			    </body>

@@ -183,12 +183,12 @@ nav ul li a:hover {
 .bs-callout {
     padding: 20px;
     margin: 20px 0;
-	margin-left: 25%;
+	margin-left: 23%;
 	background-color: #ffffff;
     border: 1px solid #eee;
     border-left-width: 5px;
     border-radius: 3px;
-	width: 600px;
+	width: 700px;
 }
 .bs-callout h4 {
     margin-top: 0;

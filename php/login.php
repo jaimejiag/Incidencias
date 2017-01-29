@@ -31,7 +31,9 @@
                 if ($app->getDao()->checkUser($user, $password)){
                     $app->init_session($user);
                     $userId = $app->getDao()->getUserId($user);
+                    $super = $app->getDao()->getUserSuper($user);
                     $_SESSION["userId"] = $userId[0];
+                    $_SESSION["userSuper"] = $super[0];
                     echo "<script language='javascript'>window.location.href='incidencias.php'</script>";
                 } else 
                     echo "<p>Credenciales no exiten</p>";
